@@ -1,0 +1,35 @@
+language: node_js
+
+os:
+  - osx
+
+node_js:
+  - "6"
+
+branches:
+  only:
+    - master
+
+cache:
+  directories:
+    - node_modules
+
+install:
+  - npm install
+
+script:
+  - npm run build
+
+after_script:
+  - cd dist
+  - git init
+  - git config --global user.name 'xLsDg'
+  - git config --global user.email 'xlsdg@qq.com'
+  - git add .
+  - git commit -m "Update demo"
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages
+
+env:
+  global:
+    - GH_REF: github.com/xlsdg/vue-highcharts-v5-demo.git
+    - secure: "XCRdQhwPVNWMrm2UCkGg+kfUSS6KPtuATfGGYdTPSmzy1rtj2I3D7e/FYqisgM4FFAswT1IU0KqDN7K5kHOkttjLDcOvaf/2VEwX3Dvad4MnpWEumM9/s5FBMAXdyQ1vy8rnFWIBcg6R4t/a7Vdd6urC7jvBSgj4EHSG7CH2ubxjQeDffPqTgTzh0Z9HtpX4mQyX9G8nO3b3d6DBiv+Nh3gTPH6kcW1EQQcbbd3dcZHCEVyAlTPohqZAoDsWnMhMiGtV0BFLXK/OpPSP/XkTuSFBWYuABxWH3qXbPqbkPXq0L9hHcwasQuk6gfYqpAjbHfCSZowA5BNTHoOtt4KH+q54X6zUVZLsDZgfcoLbXkzb18l2mtcY14T0YAzncjD3O1ZOqk4isMRU9H6zTSLf7vVk71BlgLFkpTpKFspYix8eawe6ib9N2Cs6RnEyx/nLlPyI8raqMPNmD1Sk/BqA1Ju8nCnM6Ju8yIlipSD/9YYFuJXWjO8Vh6DfQtt261ihLHwGGYYIb98OOvWga9V+bbYv/ncdHHQQ4TWtnlFb6TOcn7R4scvyNAzNrKrdRzgKhy3T1GM8jUsXC/1vaWJPdUPrZ9uHE3bPEhhYR8qKZD3ctfd90+jdeWK9UK+o0kYwjomwR+5WTPVVDtbLknWld8JebieQBYqcbOc2ORbB4x0="
